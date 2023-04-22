@@ -1,6 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from rest_framework.viewsets import ModelViewSet 
+from .models import Link, Server
+from .serialization import LinkSerializer, ServerSerializer
 
-def home(request):
-    return HttpResponse('fuck iran government')
+
+class LinkViewSet(ModelViewSet):
+    queryset = Link.objects.all()
+    serializer_class = LinkSerializer
+
+
+class ServerViewSet(ModelViewSet):
+    queryset = Server.objects.all()
+    serializer_class = ServerSerializer
