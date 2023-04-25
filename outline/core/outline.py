@@ -31,3 +31,11 @@ class Outline():
         """
         return json.loads(self.__http_get(f'{self.apiUrl}/server/').content)
 
+
+    def list_access_keys(self) -> dict:
+        """Lists the access keys
+
+        Returns:
+            dict: 200 Lists og access keys(HTTP GET)
+        """
+        return json.loads(self.__http_get(f'{self.apiUrl}/access-keys/').content)
