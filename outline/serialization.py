@@ -5,10 +5,10 @@ from .models import Link, Server
 class LinkSerializer(ModelSerializer):
     class Meta:
         model = Link
-        fields = ['id', 'name', 'max_size', 'usage', 'enabled', 'key', 'exp_date']
+        fields = '__all__'
 
 
 class ServerSerializer(ModelSerializer):
     class Meta:
         model = Server
-        fields = ['apiUrl', 'certSha256']
+        fields = '__all__'
