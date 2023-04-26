@@ -70,3 +70,10 @@ class Outline():
 
     def get_usage_limit(self) -> dict:
         return json.loads(self.__http_get(f'{self.apiUrl}/metrics/transfer/').content)
+
+    def delete_key(self, id: int) -> bool:
+        if type(id) != int:
+            raise TypeError('the id should be an intiger')
+        if requests.delete(f'{self.apiUrl}/access-keys/{id}/', verify=False).status_code == 404:
+            return True
+        return False
