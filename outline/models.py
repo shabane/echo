@@ -1,6 +1,16 @@
 from django.db import models
 
-# Create your models here.
+
+class Server(models.Model):
+    certSha256 = models.TextField(blank=True)
+    apiUrl = models.CharField(max_length=255)
+    wrapper_ip = models.CharField(max_length=15, default='0.0.0.0')
+    wrapper_port = models.CharField(max_length=5, default='443')
+    name = models.CharField(max_length=125, default='None')
+
+    def __str__(self) -> str:
+        return self.name
+
 
 class Link(models.Model):
     name = models.CharField(max_length=100)
@@ -12,10 +22,4 @@ class Link(models.Model):
     exp_date = models.DateField()
     pastebin_link = models.CharField(max_length=100, null=True, blank=True)
     note = models.TextField(null=True)
-
-
-class Server(models.Model):
-    certSha256 = models.TextField()
-    apiUrl = models.CharField(max_length=255)
-    wrapper_ip = models.CharField(max_length=15, default='0.0.0.0')
-    wrapper_port = models.CharField(max_length=5, default='443')
+    server = models.ForeignKey(Server, on_delete=models.CASCADE, null=True)
