@@ -66,6 +66,7 @@ class Outline():
         __key = json.loads(self.__http_post(url=f'{self.apiUrl}/access-keys/', json_data={"method": "aes-192-gcm"}).content) # create new key
         self.__http_put(url=f'{self.apiUrl}/access-keys/{__key["id"]}/name/', data={"name": name}) # rename it
         self.__http_put(url=f'{self.apiUrl}/access-keys/{__key["id"]}/data-limit/', json_data={"limit": {"bytes": usage_limit}}) # set usage limit
+        return __key
 
 
     def get_usage_limit(self) -> dict:
