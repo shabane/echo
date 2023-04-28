@@ -23,6 +23,7 @@ class Link(models.Model):
     pastebin_link = models.CharField(max_length=100, null=True, blank=True)
     note = models.TextField(null=True, blank=True)
     server = models.ForeignKey(Server, on_delete=models.CASCADE, null=True)
+    outline_id = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return self.name

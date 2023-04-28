@@ -24,9 +24,10 @@ class LinkViewSet(ModelViewSet):
             __expire = serializer_class.validated_data['exp_date']
             __paste_bin_link = ubuntuir.paste(__key['accessUrl'])
             __server = serializer_class.validated_data['server']
-            Link.objects.create(name=__name, max_size=__max_usage, key=__key['accessUrl']+f'#{__name}', note=__note, enabled=__enabled, exp_date=__expire, pastebin_link=__paste_bin_link, server=__server)
+
+            Link.objects.create(name=__name, max_size=__max_usage, key=__key['accessUrl']+f'#{__name}', note=__note, enabled=__enabled, exp_date=__expire, pastebin_link=__paste_bin_link, server=__server, outline_id=__key['id'])
             return Response({
-                'id': __key['id'],
+                'ok': True,
                 'name': __name,
                 'max_size': __max_usage,
                 'enabled': __enabled,
@@ -35,6 +36,7 @@ class LinkViewSet(ModelViewSet):
                 'paste_bin_link': __paste_bin_link,
                 'note': __note,
                 'server': __server.name,
+                'outline_id': __key['id'],
             })
         return Response({
             'ok': False,
