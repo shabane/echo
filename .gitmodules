@@ -1,0 +1,3 @@
+[submodule "outline/core/pysbin"]
+	path = outline/core/pysbin
+	url = https://github.com/shabane/pysbin.git
