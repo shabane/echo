@@ -15,11 +15,14 @@ class Server(models.Model):
 class Link(models.Model):
     name = models.CharField(max_length=100)
     max_size = models.IntegerField(default=3000)
-    usage = models.IntegerField(default=0)
+    usage = models.IntegerField(default=0, blank=True)
     enabled = models.BooleanField(default=True)
-    key = models.TextField()
+    key = models.TextField(blank=True)
     birth_date = models.DateField(auto_now_add=True)
     exp_date = models.DateField()
     pastebin_link = models.CharField(max_length=100, null=True, blank=True)
-    note = models.TextField(null=True)
+    note = models.TextField(null=True, blank=True)
     server = models.ForeignKey(Server, on_delete=models.CASCADE, null=True)
+
+    def __str__(self) -> str:
+        return self.name
