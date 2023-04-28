@@ -34,7 +34,7 @@ class Outline():
         return res
     
     
-    def __init__(self, apiUrl: str, certSha256: str) -> None:
+    def __init__(self, apiUrl: str, certSha256: str = None) -> None:
         self.apiUrl = apiUrl
         self.certSha256 = certSha256
 
