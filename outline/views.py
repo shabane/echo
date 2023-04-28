@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from rest_framework.viewsets import ModelViewSet 
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .models import Link, Server
-from .serialization import LinkSerializer, ServerSerializer
+from .serialization import LinkSerializer, ServerSerializer, LinkSerializerReadonly
 from rest_framework.response import Response
 from .core.outline import Outline
 from .models import Server, Link
@@ -46,3 +46,8 @@ class LinkViewSet(ModelViewSet):
 class ServerViewSet(ModelViewSet):
     queryset = Server.objects.all()
     serializer_class = ServerSerializer
+
+
+class LinkViewReadonly(ReadOnlyModelViewSet):
+    queryset = Link.objects.all()
+    serializer_class = LinkSerializerReadonly
