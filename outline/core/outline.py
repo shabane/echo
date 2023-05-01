@@ -76,6 +76,6 @@ class Outline():
     def delete_key(self, id: int) -> bool:
         if type(id) != int:
             raise TypeError('the id should be an intiger')
-        if requests.delete(f'{self.apiUrl}/access-keys/{id}/', verify=False).status_code == 404:
+        if requests.delete(f'{self.apiUrl}/access-keys/{id}/', verify=False).status_code:
             return True
         return False
