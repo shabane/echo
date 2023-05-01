@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from .core.outline import Outline
 from .models import Server, Link
 from .core.pysbin import ubuntuir, headers
+from rest_framework import status
 
 
 class LinkViewSet(ModelViewSet):
@@ -42,6 +43,18 @@ class LinkViewSet(ModelViewSet):
             'ok': False,
             'message': serializer_class.error_messages,
         })
+
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        _ = False
+        outline_server = Outline(instance.server.apiUrl)
+        if(_ := outline_server.delete_key(instance.outline_id)):
+            self.perform_destroy(instance)
+        return Response({
+            'ok': _,
+        }, status=status.HTTP_204_NO_CONTENT)
+
 
 class ServerViewSet(ModelViewSet):
     queryset = Server.objects.all()
