@@ -55,6 +55,15 @@ class LinkViewSet(ModelViewSet):
             'ok': _,
         }, status=status.HTTP_204_NO_CONTENT)
 
+    
+    def update(self, request, *args, **kwargs):
+        serializer_class = LinkSerializer(data=request.data)
+        if serializer_class.is_valid():
+            instance = self.get_object()
+            outline_server = Outline(instance.server.apiUrl)
+            outline_server.set_name(instance.outline_id, serializer_class.validated_data['name'])
+            outline_server.set_date_limit(instance.outline_id, serializer_class.validated_data['max_size'] * 1_000_000_000)
+            return super().update(request, *args, **kwargs)
 
 class ServerViewSet(ModelViewSet):
     queryset = Server.objects.all()
