@@ -5,7 +5,7 @@ from .models import Link, Server
 class LinkSerializer(ModelSerializer):
     class Meta:
         model = Link
-        fields = ['name', 'max_size', 'enabled', 'exp_date', 'note', 'server']
+        fields = ['id', 'name', 'max_size', 'enabled', 'exp_date', 'note', 'server']
 
 
 class ServerSerializer(ModelSerializer):
