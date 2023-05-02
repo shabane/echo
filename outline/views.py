@@ -64,6 +64,10 @@ class LinkViewSet(ModelViewSet):
             outline_server.set_name(instance.outline_id, serializer_class.validated_data['name'])
             outline_server.set_date_limit(instance.outline_id, serializer_class.validated_data['max_size'] * 1_000_000_000)
             return super().update(request, *args, **kwargs)
+        return Response({
+                'ok': False,
+                'message': serializer_class.error_messages,
+            })
 
 class ServerViewSet(ModelViewSet):
     queryset = Server.objects.all()
