@@ -7,6 +7,7 @@ from .core.outline import Outline
 from .models import Server, Link
 from .core.pysbin import ubuntuir, headers
 from rest_framework import status
+from .core import utils
 
 
 class LinkViewSet(ModelViewSet):
@@ -23,16 +24,21 @@ class LinkViewSet(ModelViewSet):
             __note = serializer_class.validated_data['note']
             __enabled = serializer_class.validated_data['enabled']
             __expire = serializer_class.validated_data['exp_date']
-            __paste_bin_link = ubuntuir.paste(__key['accessUrl'])
             __server = serializer_class.validated_data['server']
 
-            Link.objects.create(name=__name, max_size=__max_usage, key=__key['accessUrl']+f'#{__name}', note=__note, enabled=__enabled, exp_date=__expire, pastebin_link=__paste_bin_link, server=__server, outline_id=__key['id'])
+            __domain = serializer_class.validated_data['server'].wrapper_ip
+            __port = serializer_class.validated_data['server'].wrapper_port
+            __key_url = utils.re_wrapp_domain(__key['accessUrl'], __domain, __port)+f'#{__name}'
+
+            __paste_bin_link = ubuntuir.paste(__key_url)
+
+            Link.objects.create(name=__name, max_size=__max_usage, key=__key_url, note=__note, enabled=__enabled, exp_date=__expire, pastebin_link=__paste_bin_link, server=__server, outline_id=__key['id'])
             return Response({
                 'ok': True,
                 'name': __name,
                 'max_size': __max_usage,
                 'enabled': __enabled,
-                'key': __key['accessUrl']+f'#{__name}',
+                'key': __key_url,
                 'exp_date': serializer_class.validated_data['exp_date'],
                 'paste_bin_link': __paste_bin_link,
                 'note': __note,
