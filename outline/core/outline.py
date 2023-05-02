@@ -79,3 +79,9 @@ class Outline():
         if requests.delete(f'{self.apiUrl}/access-keys/{id}/', verify=False).status_code:
             return True
         return False
+
+
+    def set_date_limit(self, id: int, usage_limit: int) -> bool:
+        if self.__http_put(url=f'{self.apiUrl}/access-keys/{id}/data-limit/', json_data={"limit": {"bytes": usage_limit}}):
+            return True
+        return False
