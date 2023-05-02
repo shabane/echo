@@ -85,3 +85,9 @@ class Outline():
         if self.__http_put(url=f'{self.apiUrl}/access-keys/{id}/data-limit/', json_data={"limit": {"bytes": usage_limit}}):
             return True
         return False
+
+
+    def set_name(self, id: int, name: str) -> bool:
+        if self.__http_put(url=f'{self.apiUrl}/access-keys/{id}/name/', data={"name": name}):
+            return True
+        return False
