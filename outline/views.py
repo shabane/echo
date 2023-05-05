@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 from .models import Link, Server
-from .serialization import LinkSerializer, ServerSerializer, LinkSerializerReadonly
+from .serialization import LinkSerializer, ServerSerializer, LinkSerializerReadonly, ChannelSerializer
 from rest_framework.response import Response
 from .core.outline import Outline
-from .models import Server, Link
+from .models import Server, Link, Channel
 from .core.pysbin import ubuntuir, headers
 from rest_framework import status
 from .core import utils
@@ -83,3 +83,8 @@ class ServerViewSet(ModelViewSet):
 class LinkViewReadonly(ReadOnlyModelViewSet):
     queryset = Link.objects.all()
     serializer_class = LinkSerializerReadonly
+
+
+class ChannelViewSet(ModelViewSet):
+    queryset = Channel.objects.all()
+    serializer_class = ChannelSerializer
