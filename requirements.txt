@@ -8,7 +8,7 @@ h11==0.14.0
 httpcore==0.16.3
 httpx==0.23.3
 idna==3.4
-python-telegram-bot==20.3
+python-telegram-bot==13.10
 pytz==2023.3
 requests==2.29.0
 rfc3986==1.5.0
