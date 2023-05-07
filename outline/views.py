@@ -42,7 +42,7 @@ class LinkViewSet(ModelViewSet):
             __qrcode = open(f'static/{__name.strip()}.png', 'rb')
 
             utils.send_to_telegram(
-            channel_id=f'@{__channel.username}',
+            channel_id=f'{__channel.username}',
             caption=f"""
 name: {__name}\n
 usage: {__max_usage/1_000_000_000} GB\n
