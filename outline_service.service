@@ -1,0 +1,9 @@
+[Unit]
+Description=outline service to detect users which expired
+
+[Service]
+ExecStart=/opt/echo/outline_service.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
