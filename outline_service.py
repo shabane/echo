@@ -4,13 +4,17 @@ from datetime import datetime
 from outline.core.outline import Outline
 import logging
 from time import sleep
+from pathlib import Path
+from os import path
 
+
+BASE_DIR = Path(__file__).resolve().parent
 
 while True:
 
     date = datetime.today().date()
 
-    db = sqlite3.connect('db.sqlite3')
+    db = sqlite3.connect(path.join(BASE_DIR, 'db.sqlite3'))
     keys = db.execute(f'select * from outline_link where exp_date="{str(date)}" and enabled=1').fetchall()
 
     for key in keys:
