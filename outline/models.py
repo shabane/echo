@@ -12,7 +12,7 @@ class Channel(models.Model):
 class Server(models.Model):
     certSha256 = models.TextField(blank=True)
     apiUrl = models.CharField(max_length=255)
-    wrapper_ip = models.CharField(max_length=15, default='0.0.0.0')
+    wrapper_ip = models.CharField(max_length=100, default='sub.example.com')
     wrapper_port = models.CharField(max_length=5, default='443')
     name = models.CharField(max_length=125, default='None')
     channel = models.ForeignKey(Channel, on_delete=models.CASCADE, null=True)
