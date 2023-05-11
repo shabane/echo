@@ -11,7 +11,7 @@ while True:
     date = datetime.today().date()
 
     db = sqlite3.connect('db.sqlite3')
-    keys = db.execute(f'select * from outline_link where exp_date="{str(date)}"').fetchall()
+    keys = db.execute(f'select * from outline_link where exp_date="{str(date)}" and enabled=1').fetchall()
 
     for key in keys:
         apiUrl = db.execute(f'select * from outline_server where id={key[10]}').fetchone()[2]
@@ -21,6 +21,7 @@ while True:
             db.execute(f'update outline_link set max_size=1000000, enabled=0 where id={key[0]}')
             db.commit()
             logging.info(f'{key[1]}')
+            print(f'{key[1]}')
         else:
             logging.error(f'the key {key} did not deleted from server')
 
