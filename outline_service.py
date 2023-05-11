@@ -20,6 +20,7 @@ while True:
             # db.execute(f'delete from outline_link where id={key[0]}')
             db.execute(f'update outline_link set max_size=1000000, enabled=0 where id={key[0]}')
             db.commit()
+            logging.info(f'{key[1]}')
         else:
             logging.error(f'the key {key} did not deleted from server')
 
