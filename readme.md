@@ -7,7 +7,7 @@ an outline manager wrapper with django and python which is avilable with web int
 
 1. tracks users which are expired and disable them.
 2. each outline server you add, you can add a telegram channell to recive its keys QR.
-3. create a [pastebin](paste.ubuntu.ir) for each key.
+3. create a [pastebin](https://paste.ubuntu.ir) for each key.
 4. support multiple server.
 
 
@@ -16,7 +16,7 @@ an outline manager wrapper with django and python which is avilable with web int
 - one command installation
 
 ```bash
-sudo curl https:// | sh
+sudo curl https://raw.githubusercontent.com/shabane/echo/master/install.sh | sh
 ```
 
 > please note that you should have outline server and a server in iran to bridge theme
