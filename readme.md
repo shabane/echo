@@ -16,7 +16,7 @@ an outline manager wrapper with django and python which is avilable with web int
 - one command installation
 
 ```bash
-apt-get install curl && sudo curl https://raw.githubusercontent.com/shabane/echo/master/install.sh | sh
+sudo apt-get update && sudo apt-get install curl && sudo curl https://raw.githubusercontent.com/shabane/echo/master/install.sh | sh
 ```
 
 > please note that you should have outline server and a server in iran to bridge theme
