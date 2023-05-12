@@ -33,26 +33,26 @@ class LinkViewSet(ModelViewSet):
             __key_url = utils.re_wrapp_domain(__key['accessUrl'], __domain, __port)+f'#{__name}'
 
             __paste_bin_link = ubuntuir.paste(__key_url)
-
-            __channel = Channel.objects.get(pk=__server.channel.id)
-
+            
             Link.objects.create(name=__name, max_size=__max_usage, key=__key_url, note=__note, enabled=__enabled, exp_date=__expire, pastebin_link=__paste_bin_link, server=__server, outline_id=__key['id'])
 
-            qrcode.make(__key_url).save(f'static/{__name.strip()}.png')
-            __qrcode = open(f'static/{__name.strip()}.png', 'rb')
-            
-            utils.send_to_telegram(
-            channel_id=__channel.username,
-            caption=f"""
-name: {__name}\n
-usage: {__max_usage/1_000_000_000} GB\n
-pastebin: {__paste_bin_link}\n
-note: {__note}\n
-server: {__server.name}\n
-            """,
-                img=__qrcode,
-            )
-            __qrcode.close()
+            if __server.channel:
+                __channel = Channel.objects.get(pk=__server.channel.id)
+                qrcode.make(__key_url).save(f'static/{__name.strip()}.png')
+                __qrcode = open(f'static/{__name.strip()}.png', 'rb')
+                
+                utils.send_to_telegram(
+                channel_id=__channel.username,
+                caption=f"""
+                    \nname: {__name}\n
+                    usage: {__max_usage/1_000_000_000} GB\n
+                    pastebin: {__paste_bin_link}\n
+                    note: {__note}\n
+                    server: {__server.name}\n
+                    """,
+                    img=__qrcode,
+                )
+                __qrcode.close()
             
             return Response({
                 'ok': True,
