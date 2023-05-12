@@ -9,12 +9,11 @@ echo 'install dependencies'
 sudo apt-get install python3-pip git nginx -y
 
 echo 'download echo(outline wreapper)'
-git clone https://github.com/shabane/echo.git $BASE_DIR
+git clone https://github.com/shabane/echo.git $BASE_DIR --recurse-submodules --shallow-submodules --depth 1
 
 echo 'install libraries'
 pip3 install -r $BASE_DIR/requirements.txt
 pip3 install gunicorn
-git clone https://github.com/shabane/pysbin.git $BASE_DIR/outline/core/pysbin
 
 echo 'create direcgtory to save QRs'
 mkdir $BASE_DIR/static/
