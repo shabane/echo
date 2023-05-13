@@ -32,6 +32,7 @@ $curl -X GET $BASE_URL/outline/users/list/
 ]
 ```
 
+### get single user detail
 
 ```bash
 $curl -X GET $BASE_URL/outline/users/list/{id}/
