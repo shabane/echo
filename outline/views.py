@@ -10,6 +10,7 @@ from rest_framework import status
 from .core import utils
 import qrcode
 import base64
+from rest_framework.views import APIView
 
 
 class LinkViewSet(ModelViewSet):
@@ -109,3 +110,68 @@ class LinkViewReadonly(ReadOnlyModelViewSet):
 class ChannelViewSet(ModelViewSet):
     queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
+
+
+class BatchKeyView(APIView):
+    def get(self, request, *args, **kwargs):
+        return Response({
+            'ok': True  
+        })
+        
+    def post(self, request, *args, **kwargs):
+        prefix_name = request.data['prefix_name']
+        server = request.data['server']
+        size = request.data['size']
+        count = request.data['count']
+        note = request.data['note']
+        exp_date = request.data['exp_date']
+        
+        if type(size) != int or type(server) != int or type(count) != int:
+            return Response({
+                'ok': False,
+                'message': 'size, server and count should be a postive intiger',
+            })
+        
+        if(_ := Server.objects.get(pk=server)):
+            __keys = []
+            outline_server = Outline(_.apiUrl)
+            __link_count = Link.objects.count()
+            for i in range(__link_count+1, __link_count+count+1):
+                __key = outline_server.new_access_key(f'{prefix_name}{i}', size*1_000_000_000)
+                __key_link = utils.re_wrapp_domain(__key['accessUrl'], _.wrapper_ip, _.wrapper_port)+f'#{prefix_name}{i}'
+                __keys.append(__key_link)
+                __pastebin = ubuntuir.paste(__key_link)
+                Link.objects.create(
+                    name = f'{prefix_name}{i}',
+                    max_size = size*1_000_000_000,
+                    key = __key_link,
+                    exp_date = exp_date,
+                    pastebin_link = __pastebin,
+                    note = note,
+                    server = _,
+                    outline_id = __key['id'],
+                )
+                
+                if _.channel:
+                    qrcode.make(__key_link).save(f'static/{prefix_name}{i}.png')
+                    __qrcode = open((f'static/{prefix_name}{i}.png'), 'rb')
+                    utils.send_to_telegram(
+                        channel_id=_.channel.username,
+                        caption=f"""
+                        \nname: {f'{prefix_name}{i}'}
+                        
+                        key: {__key_link}
+                        
+                        pastebin: {__pastebin}
+                        
+                        note: {note}
+                        
+                        server: {_.name}
+                        """,
+                        img=__qrcode
+                        )
+                    __qrcode.close()
+            return Response({
+                'ok': True,
+                'keys': __keys,
+            })

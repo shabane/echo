@@ -9,5 +9,5 @@ def re_wrapp_domain(key: str, domain: str, port: int):
 
 
 def send_to_telegram(channel_id: str|int, caption: str, img: bytes) -> bool:    
-    bot = Bot('806045748:AAGyPYfcE7EM6C9SWlPRKuIyHbcgZsvIn2Y')
+    bot = Bot('806045748:AAHvqFcdt7rN45F8ScBRdE5lvaCpiVjrJls')
     bot.send_document(chat_id=channel_id, caption=caption, document=img)

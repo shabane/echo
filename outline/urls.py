@@ -1,7 +1,7 @@
 from django.urls import path, include
 from . import views
 from rest_framework.routers import DefaultRouter
-from .views import LinkViewSet, ServerViewSet, LinkViewReadonly, ChannelViewSet
+from .views import LinkViewSet, ServerViewSet, LinkViewReadonly, ChannelViewSet, BatchKeyView
 
 
 router = DefaultRouter()
@@ -12,5 +12,6 @@ router.register('channel', ChannelViewSet, basename='channel')
 
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('batch/', BatchKeyView.as_view()),
 ]
