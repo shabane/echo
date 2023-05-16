@@ -11,6 +11,7 @@ from .core import utils
 import qrcode
 import base64
 from rest_framework.views import APIView
+import time
 
 
 class LinkViewSet(ModelViewSet):
@@ -171,6 +172,7 @@ class BatchKeyView(APIView):
                         img=__qrcode
                         )
                     __qrcode.close()
+                    time.sleep(1)
             return Response({
                 'ok': True,
                 'keys': __keys,
