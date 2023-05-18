@@ -194,3 +194,33 @@ $curl -X PUT $BASE_URL/outline/channel/{id}/ -H 'Content-Type: application/json'
     "name": "us channel"
 }
 ```
+
+
+---
+
+### batch user adding
+
+> *prefix_name* is the name of keys which is beggin with
+
+> *server* will indicate the server
+
+> size is in GB and it indicate the max usage of each key
+
+> count is the number of key that should create
+
+> exp_date will set an expiration date for all keys
+
+```bash
+$curl -X POST $BASE_URL/outline/batch/ -H 'Content-Type: application/json' -d {"prefix_name": "eng1_", "server": 2, "size": 30, "count": 5, "note": "batch of 10", "exp_date": "2023-06-13"}
+
+{
+    "ok": true,
+    "keys": [
+        "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpqUHczeHlXNW1nb0FJMEk2b3drelJa@irtest.ir:443/?outline=1#eng1_23",
+        "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTplNWtVdmNrbTc4VnlhaXJZbmtudWlr@irtest.ir:443/?outline=1#eng1_24",
+        "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTprbEhyNzVqWHJzam51Y0tOS08wS2Nm@irtest.ir:443/?outline=1#eng1_25",
+        "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpCTnZvUFpxaERlNWZuZ3NRbTJhTDFp@irtest.ir:443/?outline=1#eng1_26",
+        "ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpUVHBnNFR5WnFPcmo5UkszbWs3MkRB@irtest.ir:443/?outline=1#eng1_27"
+    ]
+}
+```

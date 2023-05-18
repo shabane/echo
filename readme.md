@@ -23,7 +23,7 @@ sudo apt-get update && sudo apt-get install curl -y && sudo curl https://raw.git
 > if you have no idea of how to run outline server and bridge it from iran,
 > read [this doc](https://shabane.github.io/echo/)
 
-> endpoints urls are listed in [here](https://shabane.github.io/echo/endpoints/)
+> endpoints urls are listed in [here](https://shabane.github.io/echo/endpoints)
 
 ### donation
 
