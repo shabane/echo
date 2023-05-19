@@ -9,6 +9,7 @@ an outline manager wrapper with django and python which is avilable with web int
 2. each outline server you add, you can add a telegram channell to recive its keys QR.
 3. create a [pastebin](https://paste.ubuntu.ir) for each key.
 4. support multiple server.
+5. add batch key.
 
 
 ### installation

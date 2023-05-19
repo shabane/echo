@@ -83,6 +83,7 @@ to manage outline users with web pannel you can use this web app.
     - post each key detail to telegram channel or group.
     - make QR code of each key.
     - multiple servers support.
+    - add batch key, multiple key with one request.
 
 I. to install it, just copy and paste install command
 
