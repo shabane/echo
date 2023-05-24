@@ -1,0 +1,42 @@
+{% extends 'base.html' %} %}
+
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-2 g-4" style="margin: 4%">
+    {% for link in links %}
+            <div class="card mb-3" style="max-width: 540px; margin: 1%">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <span id="{{link.id}}" class="img-fluid rounded-start" > </snan>
+                        <input style="margin: 10%" class="btn btn-outline-info" type="button" onclick='qr("{{link.id}}", "{{link.key}}")' value="Generate QR">  
+
+                        <input style="margin: 10%" class="btn btn-outline-success" type="button" onclick='clp("{{link.key}}")' value="Copy key">  
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ link.name }}</h5>
+                      <p class="card-text" id="{{link.id}}">{{ link.key }}</p>
+                      <p class="card-text"><small class="text-body-secondary">Expire: {{ link.exp_date }}</small></p>
+                      <p class="card-text"><small class="text-body-secondary">Limit: {{ link.max_size }}</small></p>
+                      <p class="card-text"><small class="text-body-secondary">Enable: {{ link.enabled }}</small></p>
+                      <p class="card-text"><small class="text-body-secondary">Pastebin: <a href={{ link.pastebin_link }}> {{ link.pastebin_link }} </a></small></p>
+                      <p class="card-text"><small class="text-body-secondary">Server: {{ link.server }}</small></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    {% endfor %}
+    </div>
+
+    <script>
+        function qr(elementname, key) {
+            var qrcode = new QRCode(elementname, key);
+        }
+
+        function clp(key) {
+            navigator.clipboard.writeText(key);
+            alert("text Copied");
+        }
+    </script>
+{% endblock %}
+
+
