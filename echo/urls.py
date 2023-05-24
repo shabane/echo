@@ -20,5 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('outline/', include('outline.urls')),
-    path('', include('outlineui.urls')), # i do this becase there was no api else
+    path('', include('outline.urls')),
+    path('outline/ui/', include('outlineui.urls')), # i do this becase there was no api else
 ]
