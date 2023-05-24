@@ -10,6 +10,8 @@
                         <input style="margin: 10%" class="btn btn-outline-info" type="button" onclick='qr("{{link.id}}", "{{link.key}}")' value="Generate QR">  
 
                         <input style="margin: 10%" class="btn btn-outline-success" type="button" onclick='clp("{{link.key}}")' value="Copy key">  
+                        
+                        <input style="margin: 10%" class="btn btn-outline-danger" type="button" onclick='sendDelete({{link.id}})' value="Delete">  
                   </div>
                   <div class="col-md-8">
                     <div class="card-body">
@@ -36,6 +38,14 @@
             navigator.clipboard.writeText(key);
             alert("text Copied");
         }
+
+        function sendDelete(id) {
+          const obj = JSON.stringify({ "id" : id});
+          const xhttp = new XMLHttpRequest();
+          xhttp.open('delete', `http://127.0.0.1:8000/outline/users/${id}/`);
+          xhttp.setRequestHeader('Content-Type', 'application/json');
+          xhttp.send(obj);
+          }
     </script>
 {% endblock %}
 
